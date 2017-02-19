@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js Practice Learn1</title>
+</head>
+<body>
+  <h1>Official Guide</h1>
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+  <div id="app">
+    {{ message }}
+  </div>
+
+  <h2>Hello World</h2>
+  <script>
+    // hello world
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue!'
+      }
+    });
+  </script>
+
+  <h2>v-bind</h2>
+  <div id="app-2">
+    <span v-bind:title="message">
+      Hover your mouse over me for a few seconds to see my dynamically bound title!
+    </span>
+  </div>
+
+  <script>
+    // v-bind directive
+    var app2 = new Vue({
+      el: '#app-2',
+      data: {
+        message: 'You loaded this page on ' + new Date()
+      }
+    });
+  </script>
+
+  <h2>v-if</h2>
+  <div id="app-3">
+    <p v-if="seen">Now you see me</p>
+  </div>
+
+  <script>
+    // v-if directive
+    var app3 = new Vue({
+      el: '#app-3',
+      data: {
+        seen: true
+      }
+    });
+  </script>
+
+  <h2>v-for</h2>
+  <div id="app-4">
+    <ol>
+      <li v-for="todo in todos">
+        {{ todo.text }}
+      </li>
+    </ol>
+  </div>
+  <script>
+    // v-for directive
+    var app4 = new Vue({
+      el: '#app-4',
+      data: {
+        todos: [
+          { text: 'Learn JavaScript' },
+          { text: 'Learn Vue' },
+          { text: 'Build something awesome' }
+        ]
+      }
+    });
+  </script>
+
+
+  <h2>v-on</h2>
+  <div id="app-5">
+    <p>{{ message }}</p>
+    <button v-on:click="reverseMessage">Reverse Message</button>
+  </div>
+
+  <script>
+    // v-on directive
+    var app5 = new Vue({
+      el: '#app-5',
+      data: {
+        message: 'Hello Vue.js!'
+      },
+      methods: {
+        reverseMessage: function() {
+          this.message = this.message.split('').reverse().join('');
+        }
+      }
+    });
+  </script>
+
+  <h2>v-model</h2>
+  <div id="app-6">
+    <p>{{ message }}</p>
+    <input v-model="message">
+  </div>
+
+  <script>
+    var app6 = new Vue({
+      el: '#app-6',
+      data: {
+        message: 'Hello Vue!'
+      }
+    })
+  </script>
+</body>
+</html>
