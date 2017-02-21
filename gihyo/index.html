@@ -30,5 +30,156 @@
     });
   </script>
 
+  <h2>v-for directive example</h2>
+
+  <div id="example2">
+    <li v-for="item in items" v-bind:key="item.name">
+      <p>{{ item.name }} は {{ item.price }}</p>
+    </li>
+  </div>
+
+  <script>
+    var vm2 = new Vue({
+      el: '#example2',
+      data: {
+        items: [
+          {
+            name: 'みかん',
+            price: 100
+          },
+          {
+            name: 'もも',
+            price: 300
+          },
+          {
+            name: 'いちじく',
+            price: 500
+          },
+          {
+            name: 'メロン',
+            price: 1000
+          }
+        ]
+      }
+    });
+  </script>
+
+  <h2>v-show directive example</h2>
+
+  <div id="example3">
+    <p>名前 {{name}}</p>
+    <p v-show="!isValid">
+      名前を入力してください
+    </p>
+  </div>
+
+  <script>
+    var vm3 = new Vue({
+      el: "#example3",
+      data: {
+        name: "",
+      },
+      computed: {
+        isValid: function() {
+          return this.name.length > 0;
+        }
+      }
+    });
+  </script>
+
+  <h2>v-bind:style directive example</h2>
+
+  <div id="example4" v-bind:style="{'border':(isValid ? '': '1px solid red')}">
+    <p>名前 {{name }}</p>
+    <p v-show="!isValid">
+      名前を入力してください
+    </p>
+  </div>
+
+  <script>
+    var vm4 = new Vue({
+      el: "#example4",
+      data: {
+        name: "",
+      },
+      computed: {
+        isValid: function() {
+          return this.name.length > 0;
+        }
+      }
+    });
+  </script>
+
+  <h2>v-on directive example</h2>
+
+  <div id="example5" v-bind:style="{'border':(isValid ? '': '1px solid red')}">
+    <p>名前 {{name }}</p>
+    <p>
+    <!-- <input type="text" v-on:input="name = $event.target.value"> -->
+      <input type="text" v-on:input="updateName($event)">
+    </p>
+    <p v-show="!isValid">
+      名前を入力してください
+    </p>
+    <p v-show="isValid">
+      <button v-on:click="sendData">送信</button>
+    </p>
+  </div>
+
+  <script>
+    var vm5 = new Vue({
+      el: "#example5",
+      data: {
+        name: "",
+      },
+      methods: {
+        updateName: function(event) {
+          this.name = event.target.value;
+        },
+        sendData: function() {
+          alert(this.name);
+        }
+      },
+      computed: {
+        isValid: function() {
+          return this.name.length > 0;
+        }
+      }
+    });
+  </script>
+
+  <h2>v-model directive example</h2>
+
+  <div id="example6" v-bind:style="{'border':(isValid ? '': '1px solid red')}">
+    <p>名前 {{name }}</p>
+    <p>
+      <input v-model="name">
+    </p>
+    <p v-show="!isValid">
+      名前を入力してください
+    </p>
+    <p v-show="isValid">
+      <button v-on:click="sendData">送信</button>
+    </p>
+  </div>
+
+  <script>
+    var vm6 = new Vue({
+      el: "#example6",
+      data: {
+        name: "",
+      },
+      methods: {
+        sendData: function() {
+          alert(this.name);
+        }
+      },
+      computed: {
+        isValid: function() {
+          return this.name.length > 0;
+        }
+      }
+    });
+  </script>
 </body>
 </html>
