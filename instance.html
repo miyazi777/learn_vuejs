@@ -56,6 +56,24 @@
     vm.a = 2;
 
   </script>
+
+  <h2>instance example3</h2>
+
+  <p>Vueインスタンスのフック</p>
+  <p>createdメソッドはインスタンス生成直後に呼び出される</p>
+
+  <script>
+    var vm = new Vue({
+      data: {
+        a: 11
+      },
+      created: function () {
+        console.log('a is: ' + this.a);
+      }
+    })
+    // -> "a is: 11"
+  </script>
+
 </body>
 
 </html>
