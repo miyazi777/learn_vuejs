@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js Practice Learn2(技術評論社の連載の写経)</title>
+</head>
+<body>
+  <h1>Official Guide</h1>
+  <a href="http://gihyo.jp/dev/serial/01/vuejs/0003">参考サイト</a>
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+  <h2>component example1</h2>
+
+  <div id="fruits-list">
+    <fruits-list-title></fruits-list-title>
+  </div>
+
+  <script>
+    Vue.component('fruits-list-title', {
+      template: '<h1>フルーツ一覧</h1>'
+    });
+
+    var vm1 = new Vue({
+      el: '#fruits-list'
+    })
+  </script>
+
+  <h2>component example2</h2>
+
+  <div id="list">
+    <list-parent></list-parent>
+  </div>
+
+  <script>
+    var listChild = Vue.extend({
+      template: '<h1>フルーツ一覧</h1>'
+    })
+
+    var listParent = Vue.extend({
+      template: '<div>親コンポーネント<list-child></list-child></div>',
+      components: {
+        'list-child': listChild
+      }
+    })
+
+    new Vue({
+      el: "#list",
+      components: {
+        'list-parent': listParent
+      }
+    })
+  </script>
+
+  <h2>component example3</h2>
+
+  <div id="fruits-component">
+    <ol>
+      <fruits-list v-for="fruit in fruits" v-bind:item="fruit"></fruits-list>
+    </ol>
+  </div>
+
+  <script>
+    Vue.component('fruits-list', {
+      props: ['item'],
+      template: '<li>{{item.name}}</li>'
+    });
+
+    new Vue({
+      el: '#fruits-component',
+      data: {
+        fruits: [
+          {name: '梨'},
+          {name: 'イチゴ'}
+        ]
+      }
+    });
+  </script>
+
+</body>
+</html>
