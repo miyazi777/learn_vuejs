@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js Practice Learn1</title>
+</head>
+<body>
+  <h1>Official Guide(Component)</h1>
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+  <h2>component example1</h2>
+
+  <p>コンポーネントの登録の基本(グローバルな登録)</p>
+
+  <div id="example">
+    <my-component></my-component>
+  </div>
+
+  <script>
+    Vue.component('my-component', {
+      template: '<div>A custom component!</div>'
+    });
+    new Vue({
+      el: '#example'
+    });
+  </script>
+
+  <h2>component example2</h2>
+
+  <p>コンポーネントのローカル登録の基本</p>
+
+  <div id="example2">
+    <my-component></my-component>
+  </div>
+
+  <script>
+    var Child = {
+      template: '<div>A custom local component!</div>'
+    };
+
+    new Vue({
+      el: '#example2',
+      components: {
+       'my-component': Child
+      }
+    });
+  </script>
+</body>
+</html>
