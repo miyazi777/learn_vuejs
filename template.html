@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js Practice Learn3</title>
+</head>
+<body>
+  <h1>Official Guide(Vue Template)</h1>
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+  <h2>instance example1</h2>
+
+  <p>テキスト</p>
+  <span id="example1">{{ msg }}</span>
+  <script>
+    var vm = new Vue({
+      el: '#example1',
+      data: { msg: "test msg"}
+    });
+    vm.msg = 'test msg+';
+  </script>
+
+  <p>テキスト2</p>
+  <p>v-onceのテスト。v-onceは１回限りの参照</p>
+  <span v-once id="example2">{{ msg }}</span>
+  <script>
+    var vm = new Vue({
+      el: '#example2',
+      data: { msg: "test msg2"}
+    });
+    vm.msg = "test msg2b";
+  </script>
+
+  <p>HTML</p>
+  <p>v-htmlでhtmlタグの描画</p>
+  <div id="example3">
+    <div v-html="rawHtml"></div>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#example3',
+      data: { rawHtml: '<p>v-html test by p tag</p>' }
+    });
+  </script>
+
+  <p>属性</p>
+  <p>v-bindは要素の属性を変更することができる</p>
+  <p>このサンプルではID属性をvueのインスタンスに定義されたdataの値に設定している</p>
+  <p>画面上はわからないが、id属性が"testid"となっている</p>
+  <div id="example4">
+    <div v-bind:id="dynamicId">
+    </div>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#example4',
+      data: { dynamicId: "testid"}
+    });
+  </script>
+
+  <p>属性２</p>
+  <p>v-bindでIDを動的に定義していることはexample4と同じだがプレフィクス "list-"が付いている</p>
+  <div id="example5">
+    <div v-bind:id="'list-' + dynamicId">
+    </div>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#example5',
+      data: { dynamicId: "testid"}
+    });
+  </script>
+</body>
+
+</html>
