@@ -11,7 +11,7 @@
 
   <h2>instance example1</h2>
 
-  <p>テキスト</p>
+  <h3>テキスト</h3>
   <span id="example1">{{ msg }}</span>
   <script>
     var vm = new Vue({
@@ -21,7 +21,7 @@
     vm.msg = 'test msg+';
   </script>
 
-  <p>テキスト2</p>
+  <h3>テキスト2</h3>
   <p>v-onceのテスト。v-onceは１回限りの参照</p>
   <span v-once id="example2">{{ msg }}</span>
   <script>
@@ -32,7 +32,7 @@
     vm.msg = "test msg2b";
   </script>
 
-  <p>HTML</p>
+  <h3>HTML</h3>
   <p>v-htmlでhtmlタグの描画</p>
   <div id="example3">
     <div v-html="rawHtml"></div>
@@ -44,7 +44,7 @@
     });
   </script>
 
-  <p>属性</p>
+  <h3>属性</h3>
   <p>v-bindは要素の属性を変更することができる</p>
   <p>このサンプルではID属性をvueのインスタンスに定義されたdataの値に設定している</p>
   <p>画面上はわからないが、id属性が"testid"となっている</p>
@@ -59,7 +59,7 @@
     });
   </script>
 
-  <p>属性２</p>
+  <h3>属性２</h3>
   <p>v-bindでIDを動的に定義していることはexample4と同じだがプレフィクス "list-"が付いている</p>
   <div id="example5">
     <div v-bind:id="'list-' + dynamicId">
@@ -69,6 +69,73 @@
     var vm = new Vue({
       el: '#example5',
       data: { dynamicId: "testid"}
+    });
+  </script>
+
+  <h2>ディレクティブ</h2>
+  <h3>v-if</h3>
+
+  <p>data.seenがtrueの時、Pタグが表示される</p>
+
+  <div id="example6">
+    <p v-if="seen">Now you see me</p>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#example6',
+      data: { seen: true}  # ここがtrueの時、pタグの内容が表示される
+    });
+  </script>
+
+  <h3>v-bind</h3>
+  <p>data.urlがa タグのhref属性に設定される</p>
+
+  <div id="example7">
+    <a v-bind:href="url">test link</a>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#example7',
+      data: { url: 'http://www.google.com'}
+    });
+  </script>
+
+  <h3 id="ex8">v-on</h3>
+  <p>v-on:clickで数値がインクリメントされる</p>
+
+  <div id="example8">
+    <a v-on:click="count += 1" href="#ex8">count {{count}}</a>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#example8',
+      data: { count: 0 }
+    });
+  </script>
+
+  <h3>v-bindの省略記法</h3>
+  <p>data.urlがa タグのhref属性に設定される</p>
+
+  <div id="example9">
+    <a :href="url">test link</a>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#example9',
+      data: { url: 'http://www.google.com'}
+    });
+  </script>
+
+  <h3 id="ex10">v-onの省略記法</h3>
+  <p>v-on:clickで数値がインクリメントされる</p>
+
+  <div id="example10">
+    <a @click="count += 1" href="#ex10">count {{count}}</a>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#example10',
+      data: { count: 0 }
     });
   </script>
 </body>
