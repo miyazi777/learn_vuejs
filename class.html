@@ -52,6 +52,54 @@
       }
     });
   </script>
+
+  <h3>オブジェクト構文3</h3>
+  <p>オブジェクト構文2と同じ結果になりますが、dataでclassを表現しています。</p>
+
+  <div id="example3">
+    <div v-bind:class="classObject">
+      <p>active!</p>
+    </div>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: '#example3',
+      data: {
+        classObject: {
+          isActive: true,
+          hasError: true
+        }
+      }
+    });
+  </script>
+
+  <h3>オブジェクト構文4</h3>
+  <p>オブジェクト構文3と同じ結果になりますが、computedでclassを表現しています。</p>
+
+  <div id="example4">
+    <div v-bind:class="classObject">
+      <p>active!</p>
+    </div>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: '#example4',
+      data: {
+        isActive: true,
+        error: null
+      },
+      computed: {
+        classObject: function() {
+          return {
+            active: this.isActive && !this.error,
+            'text-danger': this.error && this.error.type === 'fatal',
+          }
+        }
+      }
+    });
+  </script>
 </body>
 
 </html>
