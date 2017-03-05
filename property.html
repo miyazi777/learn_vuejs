@@ -62,6 +62,58 @@
     vm.fullName = 'John Doe'
     console.log(vm.fullName);  // -> 'Johe Doe'
   </script>
+
+  <h2>wachter example</h2>
+
+  <p>最後に?が入力された質問文を入力すると答えが表示される</p>
+  <p>axiosを使って非同期にリクエストを投げているサンプルにもなっている</p>
+
+  <div id="watch-example">
+    <p>
+      Ask a yes/no question:
+      <input v-model="question">
+    </p>
+    <p>{{ answer }}</p>
+  </div>
+
+  <script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
+  <script>
+  var watchExampleVM = new Vue({
+    el: '#watch-example',
+    data: {
+      question: '',
+      answer: 'I cannot give you an answer until you ask a question!'
+    },
+    watch: {
+      // この関数はquestionが変わるごとに実行されます。
+      question: function (newQuestion) {
+        this.answer = 'Waiting for you to step typing...'
+        this.getAnswer()
+      }
+    },
+    methods: {
+      getAnswer: _.debounce(
+        function () {
+          if (this.question.indexOf('?') === -1) {
+            this.answer = 'Questions usually contain a question mark. ;-)'
+            return
+          }
+          this.answer = 'Thiking...'
+          var vm = this
+          axios.get('https://yesno.wtf/api')
+            .then(function (response) {
+              vm.answer = _.capitalize(response.data.answer)
+            })
+            .catch(function (error) {
+              vm.answer = 'Error! Could not readch the API. ' + error
+            })
+        },
+        500
+      )
+    }
+  })
+  </script>
 </body>
 
 </html>
