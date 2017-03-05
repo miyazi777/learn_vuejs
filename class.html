@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js Practice Learn5</title>
+</head>
+<body>
+  <h1>Official Guide(Vue class & style binding)</h1>
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+  <h2>html class binding example</h2>
+
+  <h3>オブジェクト構文</h3>
+  <p>data.isActiveがtrueの時、文字の背景が赤になる(class="active"になる)</p>
+
+  <div id="example1">
+    <div v-bind:class="{ active: isActive }">
+      <p>active!</p>
+    </div>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: '#example1',
+      data: { isActive: true}
+    });
+  </script>
+
+  <style>
+    div.active {
+      background-color: red;
+      color: white;
+    }
+  </style>
+
+  <h3>オブジェクト構文2</h3>
+  <p>以下の例では複数のクラスを指定しており、isActiveとhasErrorがtrueならclassは'static active text-danger'となる</p>
+
+  <div id="example2">
+    <div class='static' v-bind:class="{ active: isActive, 'text-danger': hasError }">
+      <p>active!</p>
+    </div>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: '#example2',
+      data: {
+        isActive: true,
+        hasError: true
+      }
+    });
+  </script>
+</body>
+
+</html>
